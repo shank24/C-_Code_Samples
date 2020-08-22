@@ -10,20 +10,53 @@ namespace GradeBook
         static void Main(string[] args)
         {
 
-            var book = new Book("Java");
+            IBook book = new DiskBook("Java");
+            book.GradeAdded += OnGradeAdded;
 
-            book.AddGrade(12);
-            book.AddGrade(22);
-            book.AddGrade(32);
+            EnterGrades(book);
+
             var stats = book.GetStatistics();
-            
+
+
+            System.Console.WriteLine($"For the book named {book.Name}");
             System.Console.WriteLine($"The lowest grade is {stats.Low}");
             System.Console.WriteLine($"The highest grade is {stats.High}");
             System.Console.WriteLine($"The average grade is {stats.Average:N1}");
+            System.Console.WriteLine($"The letter grade is {stats.Letter}");
 
-            
+        }
 
-            
+
+        private static void EnterGrades(IBook book)
+        {
+            while (true)
+            {
+                System.Console.WriteLine("Enter a grade or 'q' to Quit");
+                var input = Console.ReadLine();
+
+                if (input == "q")
+                {
+                    break;
+                }
+
+                try
+                {
+                    var grade = int.Parse(input);
+                    book.AddGrade(grade);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.Message);
+                }
+
+
+            }
+
+        }
+
+        static void OnGradeAdded(object sender, EventArgs e)
+        {
+            System.Console.WriteLine("A grade was added");
         }
     }
 

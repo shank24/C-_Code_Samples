@@ -11,17 +11,20 @@ namespace GradeBook.Tests
             // arrange
 
             var book = new Book("");
-            book.AddGrade(10);
-            book.AddGrade(20);
-            book.AddGrade(30);
+            book.AddGrade(90);
+            book.AddGrade(80);
+            book.AddGrade(70);
 
             // act
             var result = book.GetStatistics();
 
             //assert
-            Assert.Equal(20,result.Average);
-            Assert.Equal(30,result.High);
-            Assert.Equal(10,result.Low);            
+            Assert.Equal(80,result.Average);
+            Assert.Equal(90,result.High);
+            Assert.Equal(70,result.Low);
+            Assert.Equal('B',result.Letter);
+
+
         }
     }
 }
