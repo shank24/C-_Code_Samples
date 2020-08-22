@@ -8,13 +8,19 @@ namespace GradeBook
         public Book(string name)
         {
             grades = new List<int>();
-            this.name = name;
+            Name = name;
         }
 
 
         public void AddGrade(int grade)
         {
-            grades.Add(grade);
+            if (grade <= 100 && grade >= 0)
+            {
+                grades.Add(grade);
+            }
+            else{
+                System.Console.WriteLine("Invalid Value");
+            }
         }
 
         public Statistics GetStatistics()
@@ -40,8 +46,7 @@ namespace GradeBook
         }
 
         List<int> grades;
-        private string name;
-
+        public string Name;
 
     }
 }
